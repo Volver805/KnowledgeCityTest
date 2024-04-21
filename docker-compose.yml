@@ -44,6 +44,7 @@ services:
     hostname: api.cc.localhost
     labels:
       - traefik.http.routers.api.rule=Host(`api.cc.localhost`)
+    command: ["bash", "-c", "a2enmod rewrite && apache2-foreground"]
   front:
     image: php:8.3-apache
     container_name: front
