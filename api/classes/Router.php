@@ -1,9 +1,12 @@
 <?php
+
 namespace Api\Classes;
 
-class Router {
-    protected $routes = ['GET' => [], 'POST' => [], 'DELETE' => [], 'PUT' => []];
+class Router
+{
 
+
+    protected $routes = ['GET' => [], 'POST' => [], 'DELETE' => [], 'PUT' => []];
     public function addRoute(string $verb, string $url, callable $target): void
     {
         $this->routes[$verb][$url] = $target;
@@ -13,15 +16,12 @@ class Router {
     {
         $urlParts = explode('?', $url);
         $url = $urlParts[0];
-
-        if(!array_key_exists($method, $this->routes)) {            
+        if (!array_key_exists($method, $this->routes)) {
             return $this->returnRequestNotFound();
         }
-        
-        foreach($this->routes[$method] as $route => $target)
-        {
+
+        foreach ($this->routes[$method] as $route => $target) {
             $pattern = preg_replace('/\/:([^\/]+)/', '/(?P<$1>[^/]+)', $route);
-            
             if (preg_match('#^' . $pattern . '$#', $url, $matches)) {
                 $params = array_filter($matches, 'is_string', ARRAY_FILTER_USE_KEY);
                 return call_user_func_array($target, array_values($params));
@@ -34,7 +34,6 @@ class Router {
     private function returnRequestNotFound(): array
     {
         http_response_code(404);
-
         return [
             'message' => 'Endpoint not found',
             'code' => 404,

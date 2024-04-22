@@ -1,12 +1,15 @@
 <?php
+
 namespace Api\Services;
 
 use PDO;
 
-class BaseService {
+class BaseService
+{
+
+
     protected PDO $db;
     protected string $table = '';
-
     public function __construct(PDO $db)
     {
         $this->db = $db;
@@ -14,7 +17,7 @@ class BaseService {
 
     public function getAll()
     {
-        
+
         $stmt = $this->db->prepare("SELECT * FROM $this->table");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

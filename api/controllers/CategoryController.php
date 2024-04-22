@@ -1,13 +1,13 @@
 <?php
 
 namespace Api\Controllers;
+
 use Api\Services\CategoryService;
 
-class CategoryController 
+class CategoryController
 {
     public function __construct(private CategoryService $categoryService)
     {
-
     }
 
     public function index()
@@ -24,8 +24,8 @@ class CategoryController
     {
 
         $category = $this->categoryService->findById($id);
-        
-        if(!isset($category)) {
+
+        if (!isset($category)) {
             http_response_code(404);
 
             return [
