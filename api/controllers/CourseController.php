@@ -24,13 +24,13 @@ class CourseController
             'message' => 'Courses retrieved successfully',
             'code' => 200,
             'status' => 'success with payload',
-            'courses' => $this->courseService->getAllCourses()
+            'courses' => $this->courseService->getAll()
         ];
     }
 
     public function show(string $id)
     {
-        $course = $this->courseService->getCourseById($id);
+        $course = $this->courseService->findById($id);
         
         if(!isset($course)) {
             http_response_code(404);
