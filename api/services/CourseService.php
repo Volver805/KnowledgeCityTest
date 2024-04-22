@@ -8,7 +8,6 @@ use PDO;
 class CourseService extends BaseService
 {
 
-
     protected string $table = 'courses';
     public function getCoursesByCategory(string $categoryId): array
     {

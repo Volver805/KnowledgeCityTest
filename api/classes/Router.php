@@ -33,7 +33,6 @@ class Router
 
     private function returnRequestNotFound(): array
     {
-        http_response_code(404);
         return [
             'message' => 'Endpoint not found',
             'code' => 404,

@@ -16,6 +16,12 @@ use Api\Classes\Router;
 use Api\Controllers\CourseController;
 use Api\Services\CourseService;
 
+header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method,Access-Control-Request-Headers, Authorization");
+header("Access-Control-Allow-Origin: http://cc.localhost");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+header("Access-Control-Allow-Credentials: true");
+header("HTTP/1.1 200 OK");
+
 try {
     $pdo = new PDO('mysql:host=db;dbname=course_catalog', 'test_user', 'test_password');
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

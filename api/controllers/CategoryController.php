@@ -36,7 +36,7 @@ class CategoryController
         }
 
         return [
-            'message' => 'Categories found successfully',
+            'message' => 'Category found successfully',
             'code' => 200,
             'status' => 'success with payload',
             'category' => $category
