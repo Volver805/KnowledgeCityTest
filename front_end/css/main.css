@@ -1,0 +1,102 @@
+body {
+    background-color: #dedddd;
+    font-family:'Open Sans';
+}
+
+.container {
+    width:95%;
+    margin: 0 auto;
+    padding-top: 32px;
+    display: flex;
+    flex-direction: row;
+}
+
+.sidenav {
+    flex: 20%;
+}
+
+.sidenav ul {
+    list-style: none;
+    font-weight: 600;
+    padding-left: 25px;
+}
+
+.sidenav ul > ul {
+    margin-bottom:20px;
+}
+
+.sidenav ul > ul > ul {
+    margin:0;
+}
+
+.sidenav li {
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.sidenav li span {
+    font-weight: 500;
+    font-size: 12px;
+}
+
+.sidenav .active-category {
+    font-weight: 900;
+}
+
+.sidenav .active-category::before {
+    content: "";
+    display: inline-block;
+    height: 14px;
+    width: 5px;
+    margin-right: 5px;
+    background-color: rgb(211, 169, 53);
+}
+
+.main {
+    flex: 80%;
+    text-align: center;
+}
+
+.main .grid-container {
+    padding: 2%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.grid-container .card {
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.grid-container .card img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.grid-container .card .course-name {
+    font-weight: bold;
+}
+
+.grid-container .card p {
+    width: 90%;
+    margin: 10px auto;
+    text-align: left;
+}
+
+/* Tablet */
+@media (max-width:1025px) {
+    .sidenav {
+        flex: 30%;
+    }
+    .main {
+        flex: 70%;
+    }
+    .main .grid-container {
+        grid-template-columns: repeat(1, 1fr);
+    }    
+
+}
