@@ -33,7 +33,6 @@ $courseController = new CourseController($courseService);
 $router = new Router();
 
 $router->addRoute('GET', '/courses', [$courseController, 'index']);
-
 $router->addRoute('GET', '/courses/:courseId', [$courseController, 'show']);
 
 try {

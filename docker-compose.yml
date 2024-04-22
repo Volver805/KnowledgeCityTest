@@ -44,7 +44,7 @@ services:
     hostname: api.cc.localhost
     labels:
       - traefik.http.routers.api.rule=Host(`api.cc.localhost`)
-    command: ["bash", "-c", "a2enmod rewrite && apache2-foreground"]
+    command: ["bash", "-c", "apt-get update && apt-get install -y default-mysql-client && docker-php-ext-install pdo_mysql && a2enmod rewrite && apache2-foreground"]
   front:
     image: php:8.3-apache
     container_name: front
@@ -57,3 +57,9 @@ services:
     hostname: api.cc.localhost
     labels:
       - traefik.http.routers.front.rule=Host(`cc.localhost`)
+
+  migrations:
+    image: mysql:8
+    volumes:
+      - ./database/migrations:/docker-entrypoint-initdb.d
+    command: ["--default-authentication-plugin=mysql_native_password"]

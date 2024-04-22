@@ -11,6 +11,9 @@ class Router {
 
     public function match($method, $url): array
     {
+        $urlParts = explode('?', $url);
+        $url = $urlParts[0];
+
         if(!array_key_exists($method, $this->routes)) {            
             return $this->returnRequestNotFound();
         }
