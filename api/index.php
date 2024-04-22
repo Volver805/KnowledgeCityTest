@@ -2,9 +2,13 @@
 namespace Api;
 
 require_once './services/CourseService.php';
+require_once './services/CategoryService.php';
 require_once './controllers/CourseController.php';
+require_once './controllers/CategoryController.php';
 require_once './classes/Router.php';
 
+use Api\Controllers\CategoryController;
+use Api\Services\CategoryService;
 use Exception;
 use PDO;
 use Api\Classes\Router;
@@ -16,6 +20,8 @@ try {
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	
 	$courseService = new CourseService($pdo);
+	$categoryService = new CategoryService($pdo);
+
 } catch (Exception $e) {	
 	http_response_code(500);
 
@@ -29,11 +35,14 @@ try {
 }
 
 $courseController = new CourseController($courseService);
+$categoryController = new CategoryController($categoryService);
 
 $router = new Router();
 
 $router->addRoute('GET', '/courses', [$courseController, 'index']);
 $router->addRoute('GET', '/courses/:courseId', [$courseController, 'show']);
+$router->addRoute('GET', '/categories', [$categoryController, 'index']);
+$router->addRoute('GET', '/categories/:categoryId', [$categoryController, 'show']);
 
 try {
 	$response = $router->match($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
