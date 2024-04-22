@@ -11,9 +11,7 @@ class Router {
 
     public function match($method, $url): array
     {
-        if(!array_key_exists($method, $this->routes)) {
-            http_response_code(404);
-            
+        if(!array_key_exists($method, $this->routes)) {            
             return $this->returnRequestNotFound();
         }
         
@@ -23,7 +21,7 @@ class Router {
             
             if (preg_match('#^' . $pattern . '$#', $url, $matches)) {
                 $params = array_filter($matches, 'is_string', ARRAY_FILTER_USE_KEY);
-                return call_user_func_array($target, $params);
+                return call_user_func_array($target, array_values($params));
             }
         }
 
@@ -32,9 +30,12 @@ class Router {
 
     private function returnRequestNotFound(): array
     {
+        http_response_code(404);
+
         return [
             'message' => 'Endpoint not found',
-            'code' => 404
+            'code' => 404,
+            'status' => 'Not found'
         ];
     }
 }
